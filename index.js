@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express()
 const PORT = process.env.PORT || 3001
-const cors =  require('cors')
+const cors =  require('cors');
+const { response } = require('express');
 
 app.use(cors())
 app.use(express.json());
@@ -52,6 +53,12 @@ app.get('/api/persons/:id', (request, response) => {
     } else{
         response.status(400).send("Invalid id, user doesn't exist")
     }   
+})
+
+app.delete('/api/persons/:id', (request, response)=>{
+    const id = parseInt(request.params.id)
+    let personsList = persons.filter(per =>  per.id !== id)
+    response.json(personsList)
 })
 
 app.post('/api/persons', (request, response) => {
