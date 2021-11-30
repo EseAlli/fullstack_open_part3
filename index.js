@@ -51,8 +51,7 @@ app.get('/api/persons/:id', (request, response) => {
         response.json(person)
     } else{
         response.status(400).send("Invalid id, user doesn't exist")
-    }
-    
+    }   
 })
 
 app.post('/api/persons', (request, response) => {
